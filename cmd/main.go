@@ -11,7 +11,7 @@ import (
 func main() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/gif", handlers.GifHandler)
+	r.HandleFunc("/gif.gif", handlers.GifHandler)
 
 	http.Handle("/", r)
 
