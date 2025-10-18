@@ -20,5 +20,7 @@ func GifHandler(writer http.ResponseWriter, req *http.Request) {
 	input = input.Output("pipe:1", ffmpeg.KwArgs{"format": "gif"})
 	input = input.WithOutput(writer)
 
+	writer.Header().Add("Content-Type", "image/gif")
+
 	input.Run()
 }
