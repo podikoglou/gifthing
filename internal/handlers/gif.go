@@ -15,12 +15,12 @@ func GifHandler(writer http.ResponseWriter, req *http.Request) {
 	// there is *probably* a path traversal vulnerability hidden here
 	text := query.Get("text")
 
+	writer.Header().Add("Content-Type", "image/gif")
+
 	input := ffmpeg.Input(fmt.Sprintf("gifs/%s.gif", gif))
 	input = input.Drawtext(text, 100, 200, false)
 	input = input.Output("pipe:1", ffmpeg.KwArgs{"format": "gif"})
 	input = input.WithOutput(writer)
-
-	writer.Header().Add("Content-Type", "image/gif")
 
 	input.Run()
 }
